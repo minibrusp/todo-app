@@ -11,9 +11,8 @@ const TodoOptions = (props) => {
 
     return ( 
         <div className='flex justify-between items-center bg-neutral-light-verylightgray py-[10.6px] px-[16px] text-neutral-light-darkgrayishblue text-[12px] relative 
-        rounded-b-md dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-darkgrayishblue
-        '>
-            <span>
+        rounded-b-md dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-darkgrayishblue sm:text-[13px] sm:py-2 sm:px-[1.3rem]'>
+            <span className='sm:w-full'>
             { sortType == 'all' && todos.length + " " }
             { sortType == 'active' && notCompleteLength + " " }
             { sortType == 'complete' && completeLength + " " }
@@ -24,7 +23,7 @@ const TodoOptions = (props) => {
             </span>
 
 
-            <div className='flex justify-center items-center gap-4 bg-neutral-light-verylightgray py-[10.6px] px-[16px] text-neutral-light-darkgrayishblue text-md font-bold absolute w-full left-0 top-[3.7rem] text-[14px] shadow-lg dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal rounded-md'>
+            <div className='flex justify-center items-center gap-4 bg-neutral-light-verylightgray py-[10.6px] px-[16px] text-neutral-light-darkgrayishblue text-md font-bold absolute w-full left-0 top-[3.7rem] text-[14px] shadow-lg dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal rounded-md sm:static sm:shadow-none sm:p-0'>
                 <label className='cursor-pointer hover:text-neutral-light-verydarkgrayishblue
                 dark:text-neutral-dark-darkgrayishblue
                 hover:dark:text-neutral-dark-lightgrayishblue-hover'>
@@ -47,7 +46,7 @@ const TodoOptions = (props) => {
 
 
 
-            <button className='hover:text-neutral-light-verydarkgrayishblue hover:dark:text-neutral-dark-lightgrayishblue-hover'
+            <button className='hover:text-neutral-light-verydarkgrayishblue hover:dark:text-neutral-dark-lightgrayishblue-hover sm:w-full sm:text-right'
             onClick={handleBtnClick}
             >Clear Completed</button>
         </div>

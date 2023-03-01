@@ -20,7 +20,7 @@ body {
 @layer {
   .completed {
     @apply 
-    text-neutral-light-darkgrayishblue 
+    text-neutral-light-lightgrayishblue
     dark:text-neutral-dark-verydarkgrayishblue
     line-through
   }

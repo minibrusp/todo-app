@@ -9,28 +9,33 @@ const TodoContextProvider = ({children}) => {
 
     const [ todos, dispatch ] = useReducer(todoReducer, [
         {
+            task: 'Complete online Javascript course',
+            completed: true,
+            id: uuidv1()
+        },
+        {
             task: 'Jog around the park 3x',
             completed: false,
             id: uuidv1()
         },
         {
-            task: 'sleep 8hrs today',
+            task: '10 minutes meditation',
             completed: false,
             id: uuidv1()
         },
         {
-            task: 'drink water',
+            task: 'Read for 1 hour',
             completed: false,
             id: uuidv1()
         },
         {
-            task: 'bike 1hr',
-            completed: true,
+            task: 'Pick up groceries',
+            completed: false,
             id: uuidv1()
         },
         {
-            task: 'run 10mins',
-            completed: true,
+            task: 'Complete Todo App Frontend Mentor',
+            completed: false,
             id: uuidv1()
         },
     ])
