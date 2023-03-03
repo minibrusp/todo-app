@@ -24,4 +24,15 @@ body {
     dark:text-neutral-dark-verydarkgrayishblue
     line-through
   }
+
+  .dragging {
+    @apply
+    opacity-40
+  }
+
+  
+  .target {
+    @apply
+    text-primary-brightblue
+  }
 }

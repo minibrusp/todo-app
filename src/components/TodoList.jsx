@@ -20,14 +20,25 @@ const TodoList = () => {
         switch(type) {
             case 'DRAG_START': {
                 startingTodoRef.current = index
+                startingTodoRef.elem = event.target
+                // console.log(event.target)
+                event.target.classList.add('dragging')
                 break
             }
             case 'DRAG_ENTER': {
+                event.preventDefault()
                 targetTodoRef.current = index
+                event.target.classList.add('target')
+                break
+            }
+            case 'DRAG_LEAVE': {
+                event.preventDefault()
+                event.target.classList.remove('target')
                 break
             }
             case 'DRAG_END': {
                 event.preventDefault()
+                startingTodoRef.elem.classList.remove('dragging')
                 let _todos = [...todos]
         
                 const draggedItemContent = _todos.splice(startingTodoRef.current, 1)[0]
