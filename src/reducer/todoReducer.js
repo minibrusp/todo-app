@@ -5,6 +5,7 @@ export const ACTIONS = {
     DEL_TODO: 'deltodo',
     COMP_TODO: 'completetodo',
     CLEAR_COMP_TODO: 'clearcompletedtodo',
+    RE_ORDER_TODO: 'reordertodo',
 }
 
 const todoReducer = (state, action) => {
@@ -32,6 +33,9 @@ const todoReducer = (state, action) => {
         }
         case ACTIONS.CLEAR_COMP_TODO: {
             return state.filter(todo => todo.completed !== true)
+        }
+        case ACTIONS.RE_ORDER_TODO: {
+            return action.todo
         }
 
         default: return state

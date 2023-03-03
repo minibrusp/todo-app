@@ -4,7 +4,7 @@ import IconCross from '../images/icon-cross.svg'
 import { ACTIONS } from '../reducer/todoReducer';
 
 const TodoItem = (props) => {
-	const {todo, id, completed, dispatch} = props
+	const { todo, id, completed, dispatch, todos, index, handleDrag } = props
 
 	const handleDelete = () => {
 		dispatch({type: ACTIONS.DEL_TODO , id: id})
@@ -15,7 +15,12 @@ const TodoItem = (props) => {
 	}
 
     return ( 
-      	<li className='group/list flex justify-between items-center bg-neutral-light-verylightgray py-[10.6px] px-[16px] border-b first:rounded-t-md text-neutral-light-verydarkgrayishblue dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal dark:border-neutral-dark-verydarkgrayishblue2 sm:py-4 sm:px-[1.3rem]'>
+      	<li className='group/list flex justify-between items-center bg-neutral-light-verylightgray py-[10.6px] px-[16px] border-b first:rounded-t-md text-neutral-light-verydarkgrayishblue dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal dark:border-neutral-dark-verydarkgrayishblue2 sm:py-4 sm:px-[1.3rem]' draggable
+		//  handleDrag(Params: event, index, type, todos)
+		onDragStart={(e) => handleDrag(e, index, 'DRAG_START', todos)}
+		onDragEnter={(e) => handleDrag(e, index, 'DRAG_ENTER', todos)}
+		onDragEnd={(e) => handleDrag(e, index, 'DRAG_END', todos)}
+		>
 				
 			<label className='flex justify-start items-center w-full cursor-move' >
 				<div className='mr-2 w-6 aspect-square relative flex justify-center items-center cursor-pointer peer sm:mr-[16px]'>
