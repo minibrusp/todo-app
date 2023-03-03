@@ -1,10 +1,13 @@
-import React, { useContext, useRef, useState } from 'react';
-import { TodoContext } from '../context/TodoContext';
-import { ACTIONS } from '../reducer/todoReducer';
-import TodoItem from './TodoItem';
-import TodoOptions from './TodoOptions';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
+import { TodoContext } from '../context/TodoContext'
+import { ACTIONS } from '../reducer/todoReducer'
+import TodoItem from './TodoItem'
+import TodoOptions from './TodoOptions'
+import {gsap} from 'gsap'
 
-const TodoList = () => {
+gsap.registerPlugin()
+
+const TodoList = ({listsRef}) => {
 
     const { todos, dispatch } = useContext(TodoContext)
 
@@ -15,6 +18,7 @@ const TodoList = () => {
     
     let startingTodoRef = useRef(null)
     let targetTodoRef = useRef(null)
+
 
     const handleDrag = (event, index, type, todos) => {
         switch(type) {
@@ -54,25 +58,81 @@ const TodoList = () => {
         }
     }
 
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.from(listsRef.current, {
+                x: -5,
+                duration: .8,
+                stagger: .2,
+                autoAlpha: 0,
+            })
+        })
+        return () => ctx.revert()        
+    }, [])
+
+    // useLayoutEffect((e) => {
+    //     let newList = listsRef.current[listsRef.current.length - 1]
+    //     if(todos.length === newList.length) return
+    //     gsap.from(newList, {
+    //         y: 10,
+    //         duration: .5,
+    //         autoAlpha: 0,
+    //     })
+
+    //     return () => {}     
+    // }, [todos])
+
+    // const addAnimationRefs = (todo) => {
+    //     let newList = listsRef.current[listsRef.current.length - 1]
+    //     gsap.from(newList, {
+    //         y: 10,
+    //         duration: .5,
+    //         autoAlpha: 0,
+    //     })
+    // }
+
+
+    const addToRefs = el => {
+        if(el && !listsRef.current.includes(el)) {
+            listsRef.current.push(el)
+        }
+    }
+
+    const onDeleteRefs = (el,id) => {
+        gsap.to(el, {
+            scaleX: 0,
+            opacity: 0,
+            duration: .5,
+            autoAlpha: 0,
+            transformOrigin: 'left',
+            backgroundColor: '#7595f8',
+            onComplete: () => {
+                dispatch({type: ACTIONS.DEL_TODO , id: id})
+            }
+        })
+    }
+
+    
+
 
     return ( 
         <div className="todo-list mx-4 shadow-2xl">
             <ul className=''>
                 {   
                     sortType == 'all' && todos.map((todo, index) => (
-                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={todos} index={index} handleDrag={handleDrag} />
+                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={todos} index={index} handleDrag={handleDrag} addToRefs={addToRefs} onDeleteRefs={onDeleteRefs}/>
                     ))
                 }
 
                 {
                     sortType == 'active' && notComplete.map((todo, index) => (
-                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={notComplete} index={index} handleDrag={handleDrag} />
+                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={notComplete} index={index} handleDrag={handleDrag} addToRefs={addToRefs} onDeleteRefs={onDeleteRefs}/>
                     ))
                 }
 
                 {
                     sortType == 'complete' && complete.map((todo, index) => (
-                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={complete} index={index} handleDrag={handleDrag} />
+                        <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={complete} index={index} handleDrag={handleDrag} addToRefs={addToRefs} onDeleteRefs={onDeleteRefs}/>
                     ))
                 }
                 
@@ -82,4 +142,4 @@ const TodoList = () => {
      );
 }
  
-export default TodoList;
+export default TodoList

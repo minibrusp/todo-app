@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ACTIONS } from '../reducer/todoReducer';
+import { ACTIONS } from '../reducer/todoReducer'
 
 const TodoOptions = (props) => {
 
@@ -53,4 +53,4 @@ const TodoOptions = (props) => {
      );
 }
  
-export default TodoOptions;
+export default TodoOptions

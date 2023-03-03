@@ -15,7 +15,7 @@ function App() {
         <Todo />
         <Footer />
       </div>
-    </TodoContextProvider>
+      </TodoContextProvider>
   )
 }
 

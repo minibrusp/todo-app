@@ -3,11 +3,11 @@ import IconCheck from '../images/icon-check.svg'
 import IconCross from '../images/icon-cross.svg'
 import { ACTIONS } from '../reducer/todoReducer';
 
-const TodoItem = (props) => {
-	const { todo, id, completed, dispatch, todos, index, handleDrag } = props
-
-	const handleDelete = () => {
-		dispatch({type: ACTIONS.DEL_TODO , id: id})
+const TodoItem = ({ todo, id, completed, dispatch, todos, index, handleDrag, addToRefs, onDeleteRefs}) => {
+	
+	const handleDelete = (e) => {
+		onDeleteRefs(e.target.parentElement.parentElement, id)
+		// dispatch({type: ACTIONS.DEL_TODO , id: id})
 	}
 
 	const handleToggleComplete = (e) => {
@@ -22,6 +22,7 @@ const TodoItem = (props) => {
 		onDragEnter={(e) => handleDrag(e, index, 'DRAG_ENTER', todos)}
 		onDragLeave={(e) => handleDrag(e, index, 'DRAG_LEAVE', todos)}
 		onDragEnd={(e) => handleDrag(e, index, 'DRAG_END', todos)}
+		ref={addToRefs}
 		>
 				
 			<label className='flex justify-start items-center w-full cursor-move' >
