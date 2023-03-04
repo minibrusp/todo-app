@@ -19,7 +19,7 @@ Light Theme | Dark Theme
 
 ### Links
 
--   Solution URL: [here]()
+-   Solution URL: [here](https://www.frontendmentor.io/solutions/todoapp-react-tailwindcss-r88abIWgGG)
 -   Live Site URL: [here](https://todo-app-three-ashy.vercel.app/)
 
 ### Built with
