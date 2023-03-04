@@ -27,5 +27,6 @@ Light Theme | Dark Theme
 -   REACT 
 -   REACT HOOKS
 -   TailwindCSS
+-   GSAP
 -   VITE
 -   Mobile-first workflow
