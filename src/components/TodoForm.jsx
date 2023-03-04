@@ -1,29 +1,36 @@
 import React, { useContext, useState } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { ACTIONS } from '../reducer/todoReducer';
-import { gsap } from 'gsap'
+import {gsap} from 'gsap'
 
 export default function TodoForm({listsRef}) {
+
+	// const { addAnimationRefs } = useContext(AnimationContext)
 
 	const [ todo, setTodo ] = useState('')
 
 	const { dispatch } = useContext(TodoContext)
 
+	const addAnimation = () => {
+		setTimeout(() => {
+			let newList = listsRef.current[listsRef.current.length - 1]
+        	gsap.from(newList, {
+            x: 100,
+            duration: .5,
+            autoAlpha: 0,
+			opacity: 0,
+        })
+		},10)
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
 		dispatch({type: ACTIONS.ADD_TODO, todos: {task: todo}})
 		setTodo('')
-		// addAnimationRefs()
+		addAnimation()
 	}
 
-	// const addAnimationRefs = () => {
-    //     let newList = listsRef.current[listsRef.current.length - 1]
-    //     gsap.from(newList, {
-    //         y: 10,
-    //         duration: .5,
-    //         autoAlpha: 0,
-    //     })
-    // }
+	
 
 	return (
 		<form className='bg-neutral-light-verylightgray flex justify-start items-center mb-4 mx-4 px-[20px] py-3 rounded drop-shadow-2xl dark:bg-neutral-dark-verydarkdesaturatedblue sm:py-4 sm:px-[1.3rem]' action="submit" onSubmit={handleSubmit}>	

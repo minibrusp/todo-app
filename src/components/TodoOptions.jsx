@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { ACTIONS } from '../reducer/todoReducer'
+import React from 'react';
 
 const TodoOptions = (props) => {
 
-    const { todos, dispatch, setSortType, sortType, completeLength, notCompleteLength } = props
+    const { todos, setSortType, sortType, completeLength, notCompleteLength, clearComplete } = props
 
     const handleBtnClick = () => {
-        dispatch({type: ACTIONS.CLEAR_COMP_TODO})
+        clearComplete()
+        // dispatch({type: ACTIONS.CLEAR_COMP_TODO})
     }
 
     return ( 

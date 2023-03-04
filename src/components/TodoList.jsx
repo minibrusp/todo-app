@@ -19,13 +19,11 @@ const TodoList = ({listsRef}) => {
     let startingTodoRef = useRef(null)
     let targetTodoRef = useRef(null)
 
-
     const handleDrag = (event, index, type, todos) => {
         switch(type) {
             case 'DRAG_START': {
                 startingTodoRef.current = index
                 startingTodoRef.elem = event.target
-                // console.log(event.target)
                 event.target.classList.add('dragging')
                 break
             }
@@ -70,27 +68,6 @@ const TodoList = ({listsRef}) => {
         return () => ctx.revert()        
     }, [])
 
-    // useLayoutEffect((e) => {
-    //     let newList = listsRef.current[listsRef.current.length - 1]
-    //     if(todos.length === newList.length) return
-    //     gsap.from(newList, {
-    //         y: 10,
-    //         duration: .5,
-    //         autoAlpha: 0,
-    //     })
-
-    //     return () => {}     
-    // }, [todos])
-
-    // const addAnimationRefs = (todo) => {
-    //     let newList = listsRef.current[listsRef.current.length - 1]
-    //     gsap.from(newList, {
-    //         y: 10,
-    //         duration: .5,
-    //         autoAlpha: 0,
-    //     })
-    // }
-
 
     const addToRefs = el => {
         if(el && !listsRef.current.includes(el)) {
@@ -98,26 +75,40 @@ const TodoList = ({listsRef}) => {
         }
     }
 
-    const onDeleteRefs = (el,id) => {
-        gsap.to(el, {
-            scaleX: 0,
+    const clearComplete = () => {
+        let x = listsRef.current.filter((current) => {
+            return current.children[0].children[0].children[0].attributes.checked !== undefined
+        })
+        gsap.to(x, {
+            x: -800,
             opacity: 0,
             duration: .5,
             autoAlpha: 0,
-            transformOrigin: 'left',
+            backgroundColor: '#7595f8',
+            stagger: .2,
+            onComplete: () => {
+                dispatch({type: ACTIONS.CLEAR_COMP_TODO})
+            }
+        })
+    }
+
+    const onDeleteRefs = (el,id) => {
+        gsap.to(el, {
+            x: -800,
+            opacity: 0,
+            duration: .5,
+            autoAlpha: 0,
             backgroundColor: '#7595f8',
             onComplete: () => {
                 dispatch({type: ACTIONS.DEL_TODO , id: id})
             }
         })
-    }
-
-    
+    } 
 
 
     return ( 
         <div className="todo-list mx-4 shadow-2xl">
-            <ul className=''>
+            <ul className="overflow-hidden">
                 {   
                     sortType == 'all' && todos.map((todo, index) => (
                         <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={todos} index={index} handleDrag={handleDrag} addToRefs={addToRefs} onDeleteRefs={onDeleteRefs}/>
@@ -137,7 +128,7 @@ const TodoList = ({listsRef}) => {
                 }
                 
             </ul>
-            <TodoOptions todos={todos} dispatch={dispatch} sortType={sortType} setSortType={setSortType} completeLength={complete.length} notCompleteLength={notComplete.length} />
+            <TodoOptions todos={todos} dispatch={dispatch} sortType={sortType} setSortType={setSortType} completeLength={complete.length} notCompleteLength={notComplete.length} clearComplete={clearComplete}/>
         </div>
      );
 }
