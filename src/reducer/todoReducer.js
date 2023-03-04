@@ -1,6 +1,7 @@
 import { v1 as uuidv1 } from 'uuid'
 
 export const ACTIONS = {
+    LOAD_TODO: 'loadtodo',
     ADD_TODO: 'addtodo',
     DEL_TODO: 'deltodo',
     COMP_TODO: 'completetodo',
@@ -10,6 +11,9 @@ export const ACTIONS = {
 
 const todoReducer = (state, action) => {
     switch(action.type) {
+        case ACTIONS.LOAD_TODO: {
+            return action.todos
+        }
         case ACTIONS.ADD_TODO: {
             return [...state, {
                 task: action.todos.task,
