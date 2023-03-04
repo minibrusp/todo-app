@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import {v1 as uuidv1 } from 'uuid'
 import {todoReducer} from '../reducer/todoReducer'
 
@@ -39,6 +39,21 @@ const TodoContextProvider = ({children}) => {
             id: uuidv1()
         },
     ])
+
+    useEffect(() => {
+        console.log(
+            JSON.parse(localStorage.getItem('todos'))
+        )
+        if(localStorage.getItem('todos')) {
+            console.log('YES I GOT IT')
+        } else {
+            console.log('NO ITEM')
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos])
 
     return (
         <TodoContext.Provider value={{todos, dispatch}}>
