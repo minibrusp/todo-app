@@ -26,19 +26,25 @@ const TodoOptions = (props) => {
             <div className='flex justify-center items-center gap-4 bg-neutral-light-verylightgray py-[10.6px] px-[16px] text-neutral-light-darkgrayishblue text-md font-bold absolute w-full left-0 top-[3.7rem] text-[14px] shadow-lg dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal rounded-md sm:static sm:shadow-none sm:p-0'>
                 <label className='cursor-pointer hover:text-neutral-light-verydarkgrayishblue
                 dark:text-neutral-dark-darkgrayishblue
-                hover:dark:text-neutral-dark-lightgrayishblue-hover'>
+                hover:dark:text-neutral-dark-lightgrayishblue-hover'
+                tabIndex={0}
+                >
                     <input type="radio" name="sort" value='all' className='hidden peer' onChange={e => setSortType(e.target.value)} defaultChecked={sortType == 'all' ? true : false} />
                     <span className='peer-checked:text-primary-brightblue'>All</span>
                 </label>
                 <label className='cursor-pointer hover:text-neutral-light-verydarkgrayishblue
                 dark:text-neutral-dark-darkgrayishblue
-                hover:dark:text-neutral-dark-lightgrayishblue-hover'>
+                hover:dark:text-neutral-dark-lightgrayishblue-hover'
+                tabIndex={0}
+                >
                     <input type="radio" name="sort" value='active' className='hidden peer' onChange={e => setSortType(e.target.value)}/>
                     <span className='peer-checked:text-primary-brightblue'>Active</span>
                 </label>
                 <label className='cursor-pointer hover:text-neutral-light-verydarkgrayishblue
                 dark:text-neutral-dark-darkgrayishblue
-                hover:dark:text-neutral-dark-lightgrayishblue-hover'>
+                hover:dark:text-neutral-dark-lightgrayishblue-hover'
+                tabIndex={0}
+                >
                     <input type="radio" name="sort" value='complete' className='hidden peer' onChange={e => setSortType(e.target.value)}/>
                     <span className='peer-checked:text-primary-brightblue'>Completed</span>
                 </label>
