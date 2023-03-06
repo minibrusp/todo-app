@@ -39,7 +39,61 @@ const todoReducer = (state, action) => {
             return state.filter(todo => todo.completed !== true)
         }
         case ACTIONS.RE_ORDER_TODO: {
-            return action.todo
+
+            switch(action.sorting) {
+                case 'all': {
+
+                    let _todos = [...state]
+        
+                    const draggedItemContent = _todos.splice(action.starting, 1)[0]
+                    _todos.splice(action.target, 0, draggedItemContent)
+
+                    // return action.todo
+                    return _todos
+                }
+                
+                case 'complete':
+                case 'active': {
+                    // console.log(`start : ` , action.starting)
+                    // console.log(`target : ` , action.target)
+                    // console.log(` starting` ,action.todo[action.starting])
+                    // console.log(` starting ID: ` ,action.todo[action.starting].id)
+                    // console.log(` target` ,action.todo[action.target])
+                    // console.log(` target ID: ` ,action.todo[action.target].id)
+                    // console.log(`is starting id and target id same? `, 
+                    // action.todo[action.starting].id ==  action.todo[action.target].id ? true : false)
+
+                    // loop through original todo 
+                    // then look for Index using ID 
+                    // then save it to the variable
+                    // the splice the positions
+                    // then return the new state of 
+
+                    console.log(action.sorting)
+
+                    let _todos = [...state]
+
+                    const StartingOriginalIndex = state.findIndex(todo => todo.id == action.todo[action.starting].id)
+                    const TargetOriginalIndex = state.findIndex(todo => todo.id == action.todo[action.target].id)
+                    
+
+                    // console.log(`starting original index `, StartingOriginalIndex)
+                    // console.log(`starting original index `, TargetOriginalIndex)
+                    // console.log(action.todo.length)
+
+                    const draggedItemContent = _todos.splice(StartingOriginalIndex, 1)[0]
+                    _todos.splice(TargetOriginalIndex, 0, draggedItemContent)
+                    
+
+                    return _todos
+                }
+
+                
+
+                default: return state
+            }
+
+            
         }
 
         default: return state

@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { TodoContext } from '../context/TodoContext'
 import { ACTIONS } from '../reducer/todoReducer'
 import TodoItem from './TodoItem'
@@ -41,20 +41,33 @@ const TodoList = ({listsRef}) => {
             case 'DRAG_END': {
                 event.preventDefault()
                 startingTodoRef.elem.classList.remove('dragging')
+               
                 let _todos = [...todos]
         
-                const draggedItemContent = _todos.splice(startingTodoRef.current, 1)[0]
-                _todos.splice(targetTodoRef.current, 0, draggedItemContent)
+                // const draggedItemContent = _todos.splice(startingTodoRef.current, 1)[0]
+                // _todos.splice(targetTodoRef.current, 0, draggedItemContent)
+                
+                dispatch({
+                    type: ACTIONS.RE_ORDER_TODO, 
+                    todo:_todos, 
+                    sorting: sortType, 
+                    starting: startingTodoRef.current,
+                    target: targetTodoRef.current 
+                })
 
                 startingTodoRef.current = null
                 targetTodoRef.current = null
 
-                dispatch({type: ACTIONS.RE_ORDER_TODO, todo:_todos})
                 break
-
             }
         }
     }
+
+    useEffect(() => {
+        console.log(`i rendered`)
+        // notComplete = todos.filter(todo => todo.completed !== true)
+        // complete = todos.filter(todo => todo.completed === true)
+    }, [todos])
 
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
