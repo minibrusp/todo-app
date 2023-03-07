@@ -19,8 +19,8 @@ Light Theme | Dark Theme
 
 ### Links
 
--   Solution URL: [here](https://www.frontendmentor.io/solutions/todoapp-react-tailwindcss-r88abIWgGG)
--   Live Site URL: [here](https://todo-app-three-ashy.vercel.app/)
+-   Solution URL: [here](https://www.frontendmentor.io/solutions/todo-app-v2-react-vite-tailwind-drag-n-touch-U5Gl-d7LlS)
+-   Live Site URL: [here](https://todo-app-n6ak-git-feature-touchdrop-minibrusp.vercel.app/)
 
 ### Built with
 
