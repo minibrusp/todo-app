@@ -18,10 +18,10 @@ const TodoItem = ({ todo, id, completed, dispatch, todos, index, handleDrag, add
       	<li className='list__item group/list flex justify-between items-center bg-neutral-light-verylightgray py-[10.6px] px-[16px] border-b first:rounded-t-md text-neutral-light-verydarkgrayishblue dark:bg-neutral-dark-verydarkdesaturatedblue dark:text-neutral-dark-lightgrayishblue-normal dark:border-neutral-dark-verydarkgrayishblue2 sm:py-4 sm:px-[1.3rem]' 
 		draggable
 		//  handleDrag(Params: event, index, type, todos)
-		onDragStart={(e) => handleDrag(e, index, 'DRAG_START', todos)}
-		onDragEnter={(e) => handleDrag(e, index, 'DRAG_ENTER', todos)}
-		onDragLeave={(e) => handleDrag(e, index, 'DRAG_LEAVE', todos)}
-		onDragEnd={(e) => handleDrag(e, index, 'DRAG_END', todos)}
+		// onDragStart={(e) => handleDrag(e, index, 'DRAG_START', todos)}
+		// onDragEnter={(e) => handleDrag(e, index, 'DRAG_ENTER', todos)}
+		// onDragLeave={(e) => handleDrag(e, index, 'DRAG_LEAVE', todos)}
+		// onDragEnd={(e) => handleDrag(e, index, 'DRAG_END', todos)}
 		ref={addToRefs}
 		>
 				

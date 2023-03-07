@@ -4,6 +4,7 @@ import { ACTIONS } from '../reducer/todoReducer'
 import TodoItem from './TodoItem'
 import TodoOptions from './TodoOptions'
 import {gsap} from 'gsap'
+import Sortable from 'sortablejs';
 
 gsap.registerPlugin()
 
@@ -13,9 +14,12 @@ const TodoList = ({listsRef}) => {
 
     const [ sortType, setSortType ] = useState('all')
 
+    const [ss, setSS] = useState(false)
+
     let notComplete = todos.filter(todo => todo.completed !== true)
     let complete = todos.filter(todo => todo.completed === true)
     
+    let containerRef = useRef(null)
     let startingTodoRef = useRef(null)
     let targetTodoRef = useRef(null)
 
@@ -65,8 +69,22 @@ const TodoList = ({listsRef}) => {
 
     useEffect(() => {
         console.log(`i rendered`)
-        // notComplete = todos.filter(todo => todo.completed !== true)
-        // complete = todos.filter(todo => todo.completed === true)
+        Sortable.create(containerRef.current, {
+            group: "sorting",
+            sort: true,
+            animation: 150,
+            onEnd: function(evt) {
+                // evt.target.classList.add('dragging')
+                // console.log(`old index`, evt.oldIndex)
+                // console.log(`new index`, evt.newIndex)
+                // console.log(`new `, containerRef.current.children)
+                dispatch({type: ACTIONS.RE_ORDER_TODO_V2, todo: containerRef.current.children})
+                setSS(!ss)
+                console.log(ss)
+            }
+        })
+
+
     }, [todos])
 
     useLayoutEffect(() => {
@@ -121,7 +139,7 @@ const TodoList = ({listsRef}) => {
 
     return ( 
         <div className="todo-list mx-4 shadow-2xl">
-            <ul className="overflow-hidden">
+            <ul className="overflow-hidden" ref={containerRef} onChange={() => console.log('Changed')}>
                 {   
                     sortType == 'all' && todos.map((todo, index) => (
                         <TodoItem todo={todo.task} id={todo.id} completed={todo.completed} key={todo.id} dispatch={dispatch} todos={todos} index={index} handleDrag={handleDrag} addToRefs={addToRefs} onDeleteRefs={onDeleteRefs}/>

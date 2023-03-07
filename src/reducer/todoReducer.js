@@ -7,6 +7,7 @@ export const ACTIONS = {
     COMP_TODO: 'completetodo',
     CLEAR_COMP_TODO: 'clearcompletedtodo',
     RE_ORDER_TODO: 'reordertodo',
+    RE_ORDER_TODO_V2: 'reordertodo'
 }
 
 const todoReducer = (state, action) => {
@@ -94,6 +95,10 @@ const todoReducer = (state, action) => {
             }
 
             
+        }
+
+        case ACTIONS.RE_ORDER_TODO_V2: {
+            return action.todo
         }
 
         default: return state
